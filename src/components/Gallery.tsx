@@ -5,19 +5,20 @@ import { cardTheme } from "../Styles/Theme.styles";
 export function GalleryContainer() {
   return <div>
    <Headline>Gallery</Headline>
-    <Gallery columns={3}>
+   <p>sdfsdfs</p>
+    <Gallery columns={4}>
       {cardGenerate(7)}
     </Gallery>
   </div>
-
 }
 
 
 type GalleryPropsType = {
-  columns?: 2 | 3 | 4 ,
+  columns?: 2 | 3 | 4 | 5,
 }
 const Gallery = styled.div<GalleryPropsType>`
-  max-width: 1100px;
+  margin: auto;
+  max-width: 1000px;
   width: 90%;
   display: grid;
   gap: 20px;
@@ -27,7 +28,7 @@ const Gallery = styled.div<GalleryPropsType>`
 
 function cardGenerate(count: number = 6) {
   const cards = [];
-  for(let i = 0; i < count; i++) {
+  for (let i = 0; i < count; i++) {
     cards.push(<Card />);
   }
   return cards;
