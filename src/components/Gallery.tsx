@@ -5,7 +5,6 @@ import { cardTheme } from "../Styles/Theme.styles";
 export function GalleryContainer() {
   return <div>
    <Headline>Gallery</Headline>
-   <p>sdfsdfs</p>
     <Gallery columns={4}>
       {cardGenerate(7)}
     </Gallery>
