@@ -4,7 +4,8 @@ import { css } from "styled-components";
 
 
 type ButtonPropsType = {
-  type?: 'outline',
+  // types?: 'outline',
+  outline?:boolean,
 }
 export const Button = styled.button<ButtonPropsType>`
   display: inline-block;
@@ -21,7 +22,7 @@ export const Button = styled.button<ButtonPropsType>`
   background-color: ${cardTheme.colors.primary};
   cursor: pointer;
 
-  ${props => props.type && css<ButtonPropsType>`
+  ${props => props.outline && css<ButtonPropsType>`
   color: ${cardTheme.colors.primary};
   background-color: #fff;
   `}
@@ -45,3 +46,6 @@ export const Button = styled.button<ButtonPropsType>`
 //   border: 2px solid ${cardTheme.colors.primary};
 // `
 
+// const Button2 = ({type}) => {
+//   return <button></button>
+// }

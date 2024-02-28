@@ -12,7 +12,9 @@ export function Card() {
         <Headline>Headline</Headline>
         <Text>Faucibus. Faucibus. Sit sit sapien sit tempusrisu ut. Sit molestie ornare in venen.</Text>  
         <Button as='a' href="#">See more</Button>
-        <Button type='outline'>Save</Button>
+        <Button outline>Save</Button>
+        {/* <Button href="#">See more</Button>
+        <Button as='button' outline>Save</Button> */}
       </div>
     </CardStyle>
   );
