@@ -1,4 +1,3 @@
-
 export const cardsCount = (cards: Array<string>) => {
     return cards.reduce((sum,el) => {
         if(/^[b-zB-Z]+$/.test(el)) {
@@ -9,6 +8,13 @@ export const cardsCount = (cards: Array<string>) => {
         }
         return sum + +el;
     },0);
+}
 
+function disemvowel(str: string) {
+    return str.replace(/[aeiou]/gi, '');
+}
 
+function findOdd(arr: Array<number>) {
+
+    return 0;
 }
