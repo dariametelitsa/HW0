@@ -29,3 +29,21 @@ function findOdd(arr: Array<number>) {
     }
 }
 
+function likes(names: Array<string>) {
+    if(names.length === 1) {
+        return (names[0] + ' likes this');
+    }
+    if(names.length > 1 && names.length < 4) {
+        const last = names[names.length - 2] + ' and ' + names[names.length - 1] + ' like this';
+        names.pop();
+        names.pop();
+        names.push(last);
+        return names.join(', ');
+    }
+    if(names.length > 3) {
+        return (names[0] + ', ' + names[1] + ' and ' + (names.length - 2) + ' others like this');
+    }
+    return 'no one likes this';
+}
+
+
