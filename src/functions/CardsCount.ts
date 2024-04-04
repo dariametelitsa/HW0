@@ -46,4 +46,11 @@ function likes(names: Array<string>) {
     return 'no one likes this';
 }
 
+function digitalRoot(n: number) {
+    while(n > 9) {
+        n = String(n).split('').reduce((sum, el) => {return sum = sum + Number(el)}, 0);
+    }
+    return n;
+}
+
 
