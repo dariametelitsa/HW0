@@ -63,4 +63,9 @@ function arrayDiff(a:Array<number>, b:Array<number>) {
     return a;
 }
 
+function highAndLow(numbers: string){
+    const arr = numbers.split(' ').sort((a, b) => a - b);
+    return arr[arr.length - 1] + ' ' + arr[0];
+}
+
 
