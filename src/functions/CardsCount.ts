@@ -53,4 +53,14 @@ function digitalRoot(n: number) {
     return n;
 }
 
+function arrayDiff(a:Array<number>, b:Array<number>) {
+    for (let i = 0; i < a.length; i++) {
+        if(b.includes(a[i])) {
+            a.splice(i, 1);
+            i--;
+        }
+    }
+    return a;
+}
+
 
