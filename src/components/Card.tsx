@@ -7,15 +7,21 @@ import myimage from './desert.jpg';
 export type CardTypes = {
     title: string;
     text: string;
+    changeText: () => void;
 }
 export function Card(props: CardTypes) {
+    function onClickButtonHandler () {
+        props.changeText();
+    }
+
   return (
     <CardStyle>
       <Image width='280' height='170' src={myimage} alt="The desert." />
       <div>
         <Headline>{props.title}</Headline>
         <Text>{props.text}</Text>
-        <Button as='a' href="#">See more</Button>
+        {/*<Button as='a' href="#">See more</Button>*/}
+          <Button onClick={onClickButtonHandler}>Next</Button>
         <Button outline>Save</Button>
       </div>
     </CardStyle>

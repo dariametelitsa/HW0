@@ -1,10 +1,14 @@
 import styled from "styled-components";
-import { Card, CardTypes } from "./Card";
+import { Card } from "./Card";
 import { cardTheme } from "../Styles/Theme.styles";
 import { useState } from "react";
 
+type CardsDataType = {
+    title: string;
+    text: string;
+}
 
-const cardsData: CardTypes[] = [
+const cardsData: Array<CardsDataType> = [
     {
         title: 'Header',
         text: 'Весьма перспективной представляется гипотеза, высказанная И.Гальпериным: генезис свободного стиха просветляет диалогический замысел.',
@@ -28,7 +32,19 @@ const cardsData: CardTypes[] = [
 ]
 
 export function GalleryContainer() {
-    let [next, setNext] = useState('0');
+    let [next, setNext] = useState(0);
+
+    function changeText() {
+        return next < cardsData.length - 1 ? setNext(next + 1) : setNext(0);
+    }
+
+    function cardGenerate(count: number = 6) {
+        const cards = [];
+        for (let i = 0; i < count; i++) {
+            cards.push(<Card title={cardsData[next].title} text={cardsData[next].text} changeText={changeText}/>);
+        }
+        return cards;
+    }
 
     return <div>
         <Headline>Gallery</Headline>
@@ -42,6 +58,7 @@ export function GalleryContainer() {
 type GalleryPropsType = {
     columns?: 2 | 3 | 4 | 5,
 }
+
 const Gallery = styled.div<GalleryPropsType>`
     margin: auto;
     max-width: 1000px;
@@ -49,16 +66,7 @@ const Gallery = styled.div<GalleryPropsType>`
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(${props => props.columns || 3}, 1fr);
-
 `
-
-function cardGenerate(count: number = 6) {
-    const cards = [];
-    for (let i = 0; i < count; i++) {
-        cards.push(<Card title={cardsData[i].title} text={cardsData[i].text}/>);
-    }
-    return cards;
-}
 
 const Headline = styled.h1`
     font-size: 35px;
