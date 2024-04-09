@@ -68,4 +68,16 @@ export const cardsCount = (cards: Array<string>) => {
 //     return arr[arr.length - 1] + ' ' + arr[0];
 // }
 
+const countBits = function(n: number) {
+    let res = 0;
+    let change = n;
+    while (change !== 0) {
+        if(change % 2) {
+            res++;
+        }
+        change = Math.floor(change / 2);
+    }
+    return res;
+};
+
 
