@@ -68,16 +68,30 @@ export const cardsCount = (cards: Array<string>) => {
 //     return arr[arr.length - 1] + ' ' + arr[0];
 // }
 
-const countBits = function(n: number) {
-    let res = 0;
-    let change = n;
-    while (change !== 0) {
-        if(change % 2) {
-            res++;
-        }
-        change = Math.floor(change / 2);
+// const countBits = function(n: number) {
+//     let res = 0;
+//     let change = n;
+//     while (change !== 0) {
+//         if(change % 2) {
+//             res++;
+//         }
+//         change = Math.floor(change / 2);
+//     }
+//     return res;
+// };
+
+function generateHashtag(str: string) {
+    if (str.length === 0) {
+        return false;
     }
-    return res;
-};
+
+    let res = str.split(' ').filter(el => el != '').map((el, i) => `${el[0].toUpperCase()}${el.slice(1)}`);
+
+    if (res.join('').length >= 140 || res.join('').length === 0) {
+        return false;
+    }
+    res.unshift('#');
+    return res.join('');
+}
 
 
