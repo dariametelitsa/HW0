@@ -5,8 +5,8 @@ const BackgroundGrid = styled.div`
     //width: 100%;
     //height: calc(100% + var(--grid-column-width));
     position: absolute;
-    //top: calc(-0.5px - var(--grid-column-width));
-    top: calc(var(--grid-column-width) * -0.5);
+    top: calc(var(--grid-gutter-width) - var(--grid-column-width));
+    //top: calc(var(--grid-column-width) * -0.5);
     bottom: 0;
     left: 0;
     right: 0;
