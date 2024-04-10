@@ -80,18 +80,18 @@ export const cardsCount = (cards: Array<string>) => {
 //     return res;
 // };
 
-function generateHashtag(str: string) {
-    if (str.length === 0) {
-        return false;
-    }
-
-    let res = str.split(' ').filter(el => el != '').map((el, i) => `${el[0].toUpperCase()}${el.slice(1)}`);
-
-    if (res.join('').length >= 140 || res.join('').length === 0) {
-        return false;
-    }
-    res.unshift('#');
-    return res.join('');
-}
+// function generateHashtag(str: string) {
+//     if (str.length === 0) {
+//         return false;
+//     }
+//
+//     let res = str.split(' ').filter(el => el != '').map((el, i) => `${el[0].toUpperCase()}${el.slice(1)}`);
+//
+//     if (res.join('').length >= 140 || res.join('').length === 0) {
+//         return false;
+//     }
+//     res.unshift('#');
+//     return res.join('');
+// }
 
 

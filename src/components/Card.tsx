@@ -35,6 +35,7 @@ const CardStyle = styled.div`
     padding: 10px;
     border-radius: 15px;
     box-shadow: 0 4px 20px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
 
     div {
         padding: 20px 10px 0;
