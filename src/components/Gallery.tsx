@@ -51,13 +51,18 @@ export function GalleryContainer() {
         return cards;
     }
 
+    let [onOff, setOnOff] = useState('Off');
+    const onOffChange = (isOn: boolean) => {
+        isOn ? setOnOff('On') : setOnOff('Off');
+    }
+
+
     return <div>
         <Headline>Gallery</Headline>
-
-        <OnOff />
-        <OnOff on />
-        <OnOff />
-
+        <OnOff callBack={onOffChange}/>
+        <OnOff callBack={onOffChange}/>
+        <OnOff callBack={onOffChange}/>
+        <span>Вы выбрали {onOff} в последний раз!</span>
 
         <Gallery columns={4}>
             {cardGenerate(cardsData.length)}

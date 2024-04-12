@@ -61,18 +61,18 @@ export const BackgroundGrid = ({height}: {height: number}) => {
 
         if (screenWidth < 760) {
             count = Math.ceil(heightContent / ((screenWidth - 40) / 9));
-            console.log("((screenWidth - 40) / 9): " + ((screenWidth - 40) / 9));
+            // console.log("((screenWidth - 40) / 9): " + ((screenWidth - 40) / 9));
         }
         if (screenWidth >= 760 && screenWidth < 1480) {
             count = Math.ceil(heightContent / ((screenWidth - 40) / 11));
-            console.log("((screenWidth - 40) / 11): " + ((screenWidth - 40) / 11));
+            //console.log("((screenWidth - 40) / 11): " + ((screenWidth - 40) / 11));
         }
         if (screenWidth >= 1480) {
             count = Math.ceil(heightContent / ((screenWidth - 40) / 17));
-            console.log("((screenWidth - 40) / 17): " + ((screenWidth - 40) / 17));
+            //console.log("((screenWidth - 40) / 17): " + ((screenWidth - 40) / 17));
         }
 
-        console.log("count: " + count);
+        //console.log("count: " + count);
         for (let i = 0; i < count; i++) {
             arr.push(<S.LineRows/>);
         }

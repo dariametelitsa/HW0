@@ -14,9 +14,8 @@ function App() {
         return document.documentElement.scrollHeight;
     }
 
-    const [height, setHeight] = useState(0);
+    let [height, setHeight] = useState(0);
     setTimeout(() => setHeight(getHeight()), 100);
-
 
     return (
         <div className="App" ref={refComponent}>
