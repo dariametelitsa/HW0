@@ -6,13 +6,13 @@ type RatingProps = {
 
 export const Rating = () => {
     let [stars, setStars] = React.useState(0);
-    const starArr = [1, 2, 3, 4, 5];
+    const starArr = [ 0, 1, 2, 3, 4];
 
     return (
         <div>
             {
-                starArr.map((star, i) => {
-                    return <Star selected={stars > i} changeRating={() => setStars(star)}/>
+                starArr.map((star) => {
+                    return <Star selected={stars > star} changeRating={() => setStars(star + 1)}/>
                 })
             }
         </div>

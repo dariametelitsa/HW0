@@ -3,7 +3,7 @@ import { Card } from "./Card";
 import { cardTheme } from "../Styles/Theme.styles";
 import { useState } from "react";
 import { OnOff } from "./onOff/OnOff";
-import { Accordion } from "./accordion/accordion";
+import { Accordion } from "./accordion/Accordion";
 import { Rating } from "./rating/Rating";
 
 type CardsDataType = {

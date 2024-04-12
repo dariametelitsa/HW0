@@ -36,9 +36,11 @@ export const OnOff = ({callBack} : {callBack: (isOn: boolean)=> void}) => {
         backgroundColor: isOn ? 'lightgreen' : 'tomato',
     };
 
-    const onClickDivHandler = (isOn: boolean) => {
-        setIsOn(isOn);
-        callBack(isOn);
+    const onClickDivHandler = (status: boolean) => {
+        if (isOn !== status) {
+            setIsOn(status);
+            callBack(status);
+        }
     }
 
     return (
