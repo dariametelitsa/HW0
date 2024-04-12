@@ -73,7 +73,7 @@ export const BackgroundGrid = ({height}: {height: number}) => {
         }
 
         console.log("count: " + count);
-        for (let i = 0; i < count + 1; i++) {
+        for (let i = 0; i < count; i++) {
             arr.push(<S.LineRows/>);
         }
         return arr;
