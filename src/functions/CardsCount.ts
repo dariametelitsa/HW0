@@ -93,23 +93,23 @@ export const cardsCount = (cards: Array<string>) => {
 //     res.unshift('#');
 //     return res.join('');
 // }
-function findOutlier(integers: Array<number>){
-    let newArr = integers.map(el => {
-        if(el === 0) return 0;
-        return Math.abs(el % 2);
-    });
-
-    let check = 0;
-
-    for(let i = 0; i < 3; i++) {
-        check = check + newArr[i];
-    }
-
-    if(check > 1)
-    {
-        return integers[newArr.findIndex(el => el === 0)];
-    }
-    return integers[newArr.findIndex(el => el === 1)]
-}
+// function findOutlier(integers: Array<number>){
+//     let newArr = integers.map(el => {
+//         if(el === 0) return 0;
+//         return Math.abs(el % 2);
+//     });
+//
+//     let check = 0;
+//
+//     for(let i = 0; i < 3; i++) {
+//         check = check + newArr[i];
+//     }
+//
+//     if(check > 1)
+//     {
+//         return integers[newArr.findIndex(el => el === 0)];
+//     }
+//     return integers[newArr.findIndex(el => el === 1)]
+// }
 
 

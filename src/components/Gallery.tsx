@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Card } from "./Card";
 import { cardTheme } from "../Styles/Theme.styles";
 import { useState } from "react";
+import { OnOff } from "./onOff/OnOff";
 
 type CardsDataType = {
     title: string;
@@ -116,6 +117,9 @@ export function GalleryContainer() {
 
     return <div>
         <Headline>Gallery</Headline>
+
+        <OnOff on />
+
         <Gallery columns={4}>
             {cardGenerate(cardsData.length)}
         </Gallery>

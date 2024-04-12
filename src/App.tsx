@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import './App.css';
 import { GalleryContainer } from './components/Gallery';
 import { BackgroundGrid } from "./components/backgroundGrid/BackgroundGrid";
@@ -16,7 +16,7 @@ function App() {
 
     return (
         <div className="App" ref={refComponent}>
-            <span>Height + {document.documentElement.scrollHeight}</span>
+            {/*<span>Height + {document.documentElement.scrollHeight}</span>*/}
             <GalleryContainer />
             <BackgroundGrid height={getHeight()}/>
         </div>
