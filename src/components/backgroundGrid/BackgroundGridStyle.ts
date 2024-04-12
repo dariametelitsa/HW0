@@ -53,12 +53,6 @@ const LineRows = styled.div`
     width: 100%;
     background: linear-gradient(90deg,var(--line-color),var(--line-color) 60%,transparent 0,transparent);
     background-size: 5px 1px;
-    
-    &:last-child {
-        position: absolute;
-        right: var(--grid-gutter-width);
-        top: 0;
-    }
 `
 
 export const S = {
