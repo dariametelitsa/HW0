@@ -4,6 +4,7 @@ import { cardTheme } from "../Styles/Theme.styles";
 import { useState } from "react";
 import { OnOff } from "./onOff/OnOff";
 import { Accordion } from "./accordion/accordion";
+import { Rating } from "./rating/Rating";
 
 type CardsDataType = {
     title: string;
@@ -52,21 +53,23 @@ export function GalleryContainer() {
         return cards;
     }
 
-    // let [onOff, setOnOff] = useState('Off');
-    // const onOffChange = (isOn: boolean) => {
-    //     isOn ? setOnOff('On') : setOnOff('Off');
-    // }
+    let [onOff, setOnOff] = useState('Off');
+    const onOffChange = (isOn: boolean) => {
+        isOn ? setOnOff('On') : setOnOff('Off');
+    }
 
 
     return <div>
         <Headline>Gallery</Headline>
-        {/*<OnOff callBack={onOffChange}/>*/}
-        {/*<OnOff callBack={onOffChange}/>*/}
-        {/*<OnOff callBack={onOffChange}/>*/}
-        {/*<span>Вы выбрали {onOff} в последний раз!</span>*/}
+        <OnOff callBack={onOffChange}/>
+        <OnOff callBack={onOffChange}/>
+        <OnOff callBack={onOffChange}/>
+        <span>Вы выбрали {onOff} в последний раз!</span>
         <div style={{ display: "flex", justifyContent: "center", gap: '60px' }}>
             <Accordion title={'Hey!'}/>
             <Accordion title={'You!'}/>
+            <Rating  />
+            <Rating  />
         </div>
 
 
