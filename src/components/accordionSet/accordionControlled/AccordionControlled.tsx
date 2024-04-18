@@ -1,28 +1,29 @@
 import React from 'react';
 
-export const AccordionControlled = ({title}: {title: string}) => {
-    let [collapsed, setCollapsed] = React.useState(false);
+type AccordionControlledProps = {
+    title: string;
+    collapsed: boolean;
+    onClickTitle: (collapsed: boolean) => void;
+}
 
-    function isCollapsedHandler () {
-        setCollapsed(!collapsed)
-    }
+export const AccordionControlled = ({title, collapsed, onClickTitle}: AccordionControlledProps) => {
 
     return (
         <div>
-            <AccordionTitle title={title} onClick={isCollapsedHandler}/>
+            <AccordionTitle title={title} onClick={() => {onClickTitle(!collapsed)}}/>
             { !collapsed && <AccordionBody />}
         </div>
     );
 };
 
 type AccordionTitleProps = {
-    title: string,
-    onClick: () => void
+    title: string;
+    onClick: () => void;
 }
 
 function AccordionTitle ({title, onClick}: AccordionTitleProps) {
     return (
-        <h3 onClick={() => onClick()}>{title}</h3>
+        <h3 onClick={onClick}>{title}</h3>
     );
 }
 

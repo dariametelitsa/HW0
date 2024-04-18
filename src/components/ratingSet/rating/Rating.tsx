@@ -1,9 +1,5 @@
 import React from 'react';
 
-type RatingProps = {
-    value: 0 | 1 | 2 | 3 | 4 | 5;
-}
-
 export const Rating = () => {
     let [stars, setStars] = React.useState(0);
     const starArr = [ 0, 1, 2, 3, 4];

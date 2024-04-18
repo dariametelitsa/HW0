@@ -8,8 +8,6 @@ type RatingProps = {
 }
 
 export const RatingControlled = (props: RatingProps) => {
-    let [stars, setStars] = React.useState(0);
-    const starArr = [0, 1, 2, 3, 4];
 
     return (
         <div>

@@ -6,6 +6,7 @@ import { OnOff } from "./onOff/OnOff";
 import { Accordion } from "./accordionSet/accordion/Accordion";
 import { Rating } from "./ratingSet/rating/Rating";
 import { RatingControlled, RatingValueType } from "./ratingSet/ratingControlled/RatingControlled";
+import { AccordionControlled } from "./accordionSet/accordionControlled/AccordionControlled";
 
 type CardsDataType = {
     title: string;
@@ -60,7 +61,7 @@ export function GalleryContainer() {
     }
 
     let [ratingValue, setRatingValue] = useState<RatingValueType>(0);
-
+    let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false);
 
     return <div>
         <Headline>Gallery</Headline>
@@ -70,7 +71,7 @@ export function GalleryContainer() {
         <span>Вы выбрали {onOff} в последний раз!</span>
         <div style={{ display: "flex", justifyContent: "center", gap: '60px' }}>
             <Accordion title={'Hey!'}/>
-            <Accordion title={'You!'}/>
+            <AccordionControlled title={'Controlled'} collapsed={accordionCollapsed} onClickTitle={setAccordionCollapsed}/>
             <Rating />
             <RatingControlled value={ratingValue} onClick={setRatingValue}/>
         </div>
