@@ -20,8 +20,8 @@ export const Rating = () => {
 };
 
 function Star({ selected, changeRating }: {selected: boolean, changeRating: () => void}) {
-    return selected ? (<span onClick={() => changeRating()} style={{margin: '0 10px', cursor: 'pointer'}}><b style={{color: 'black'}}>Star</b></span>
-    ) : (
-        <span onClick={() => changeRating()} style={{margin: '0 10px', cursor: 'pointer'}}>Star</span>
-    );
+
+    return <span onClick={() => changeRating()} style={{margin: '0 10px', cursor: 'pointer'}}>
+        {selected ? <b style={{color: 'black'}}>Star</b> : 'Star'}
+    </span>
 }
