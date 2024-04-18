@@ -3,8 +3,9 @@ import { Card } from "./Card";
 import { cardTheme } from "../Styles/Theme.styles";
 import { useState } from "react";
 import { OnOff } from "./onOff/OnOff";
-import { Accordion } from "./accordion/Accordion";
-import { Rating } from "./rating/Rating";
+import { Accordion } from "./accordionSet/accordion/Accordion";
+import { Rating } from "./ratingSet/rating/Rating";
+import { RatingControlled } from "./ratingSet/ratingControlled/RatingControlled";
 
 type CardsDataType = {
     title: string;
@@ -69,7 +70,7 @@ export function GalleryContainer() {
             <Accordion title={'Hey!'}/>
             <Accordion title={'You!'}/>
             <Rating  />
-            <Rating  />
+            <RatingControlled value={2}/>
         </div>
 
 
