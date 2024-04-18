@@ -9,7 +9,7 @@ export const Accordion = ({title}: {title: string}) => {
 
     return (
         <div>
-            <AccordionTitle title={title} callBack={isCollapsedHandler}/>
+            <AccordionTitle title={title} onClick={isCollapsedHandler}/>
             { !collapsed && <AccordionBody />}
         </div>
     );
@@ -17,12 +17,12 @@ export const Accordion = ({title}: {title: string}) => {
 
 type AccordionTitleProps = {
     title: string,
-    callBack: () => void
+    onClick: () => void
 }
 
-function AccordionTitle ({title, callBack}: AccordionTitleProps) {
+function AccordionTitle ({title, onClick}: AccordionTitleProps) {
     return (
-        <h3 onClick={() => callBack()}>{title}</h3>
+        <h3 onClick={() => onClick()}>{title}</h3>
     );
 }
 
