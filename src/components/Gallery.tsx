@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { Card } from "./Card";
 import { cardTheme } from "../Styles/Theme.styles";
 import { useState } from "react";
-import { OnOff } from "./onOff/OnOff";
+import { OnOff } from "./onOffSet/onOff/OnOff";
 import { Accordion } from "./accordionSet/accordion/Accordion";
 import { Rating } from "./ratingSet/rating/Rating";
 import { RatingControlled, RatingValueType } from "./ratingSet/ratingControlled/RatingControlled";
 import { AccordionControlled } from "./accordionSet/accordionControlled/AccordionControlled";
+import { OnOffControlled } from "./onOffSet/onOffControlled/OnOffControlled";
 
 type CardsDataType = {
     title: string;
@@ -62,12 +63,14 @@ export function GalleryContainer() {
 
     let [ratingValue, setRatingValue] = useState<RatingValueType>(0);
     let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false);
+    let [isOn, setIsOn] = useState<boolean>(false);
 
     return <div>
         <Headline>Gallery</Headline>
         <OnOff callBack={onOffChange}/>
         <OnOff callBack={onOffChange}/>
-        <OnOff callBack={onOffChange}/>
+        <OnOffControlled isOn={isOn} callBack={setIsOn} />
+
         <span>Вы выбрали {onOff} в последний раз!</span>
         <div style={{ display: "flex", justifyContent: "center", gap: '60px' }}>
             <Accordion title={'Hey!'}/>
