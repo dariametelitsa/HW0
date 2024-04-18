@@ -5,7 +5,7 @@ import { useState } from "react";
 import { OnOff } from "./onOff/OnOff";
 import { Accordion } from "./accordionSet/accordion/Accordion";
 import { Rating } from "./ratingSet/rating/Rating";
-import { RatingControlled } from "./ratingSet/ratingControlled/RatingControlled";
+import { RatingControlled, RatingValueType } from "./ratingSet/ratingControlled/RatingControlled";
 
 type CardsDataType = {
     title: string;
@@ -59,6 +59,8 @@ export function GalleryContainer() {
         isOn ? setOnOff('On') : setOnOff('Off');
     }
 
+    let [ratingValue, setRatingValue] = useState<RatingValueType>(0);
+
 
     return <div>
         <Headline>Gallery</Headline>
@@ -69,8 +71,8 @@ export function GalleryContainer() {
         <div style={{ display: "flex", justifyContent: "center", gap: '60px' }}>
             <Accordion title={'Hey!'}/>
             <Accordion title={'You!'}/>
-            <Rating  />
-            <RatingControlled value={2}/>
+            <Rating />
+            <RatingControlled value={ratingValue} onClick={setRatingValue}/>
         </div>
 
 
