@@ -63,18 +63,18 @@ export function GalleryContainer() {
 
     let [ratingValue, setRatingValue] = useState<RatingValueType>(0);
     let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false);
-    let [isOn, setIsOn] = useState<boolean>(false);
+    let [switchOn, setSwitchOn] = useState<boolean>(false);
 
     return <div>
         <Headline>Gallery</Headline>
         <OnOff callBack={onOffChange}/>
         <OnOff callBack={onOffChange}/>
-        <OnOffControlled isOn={isOn} callBack={setIsOn} />
+        <OnOffControlled isOn={switchOn} onChange={setSwitchOn} />
 
         <span>Вы выбрали {onOff} в последний раз!</span>
         <div style={{ display: "flex", justifyContent: "center", gap: '60px' }}>
             <Accordion title={'Hey!'}/>
-            <AccordionControlled title={'Controlled'} collapsed={accordionCollapsed} onClickTitle={setAccordionCollapsed}/>
+            <AccordionControlled title={'Controlled'} collapsed={accordionCollapsed} onClickTitle={() => setAccordionCollapsed(!accordionCollapsed)}/>
             <Rating />
             <RatingControlled value={ratingValue} onClick={setRatingValue}/>
         </div>

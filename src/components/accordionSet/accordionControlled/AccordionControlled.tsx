@@ -3,14 +3,14 @@ import React from 'react';
 type AccordionControlledProps = {
     title: string;
     collapsed: boolean;
-    onClickTitle: (collapsed: boolean) => void;
+    onClickTitle: () => void;
 }
 
 export const AccordionControlled = ({title, collapsed, onClickTitle}: AccordionControlledProps) => {
 
     return (
         <div>
-            <AccordionTitle title={title} onClick={() => {onClickTitle(!collapsed)}}/>
+            <AccordionTitle title={title} onClick={onClickTitle}/>
             { !collapsed && <AccordionBody />}
         </div>
     );

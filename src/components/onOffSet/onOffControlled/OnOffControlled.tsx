@@ -2,10 +2,10 @@ import React from 'react';
 
 type OnOffControlledType = {
     isOn: boolean;
-    callBack: (isOn: boolean) => void;
+    onChange: (isOn: boolean) => void;
 }
 
-export const OnOffControlled = ({callBack, isOn} : OnOffControlledType) => {
+export const OnOffControlled = ({onChange, isOn} : OnOffControlledType) => {
 
 
     const container = {
@@ -41,7 +41,7 @@ export const OnOffControlled = ({callBack, isOn} : OnOffControlledType) => {
 
     const onClickDivHandler = (status: boolean) => {
         if (isOn !== status) {
-            callBack(status);
+            onChange(status);
         }
     }
 

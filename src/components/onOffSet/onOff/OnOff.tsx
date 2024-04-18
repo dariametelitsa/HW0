@@ -36,7 +36,7 @@ export const OnOff = ({callBack} : {callBack: (isOn: boolean)=> void}) => {
         backgroundColor: isOn ? 'lightgreen' : 'tomato',
     };
 
-    const onClickDivHandler = (status: boolean) => {
+    const onClickedHandler = (status: boolean) => {
         if (isOn !== status) {
             setIsOn(status);
             callBack(status);
@@ -45,8 +45,8 @@ export const OnOff = ({callBack} : {callBack: (isOn: boolean)=> void}) => {
 
     return (
         <div style={container}>
-            <div style={onStyle} onClick={() => onClickDivHandler(true)}>On</div>
-            <div style={offStyle} onClick={() => onClickDivHandler(false)}>Off</div>
+            <div style={onStyle} onClick={() => onClickedHandler(true)}>On</div>
+            <div style={offStyle} onClick={() => onClickedHandler(false)}>Off</div>
             <div style={indicatorStyle}></div>
         </div>
     );
