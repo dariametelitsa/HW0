@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import './App.css';
-import { GalleryContainer } from './components/GalleryContainer';
+import { GalleryContainer } from './components/gallery/GalleryContainer';
 import { BackgroundGrid } from "./components/backgroundGrid/BackgroundGrid";
 
 function App() {

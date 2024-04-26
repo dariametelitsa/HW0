@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { cardTheme } from "../styles/Theme.styles";
+import { cardTheme } from "../../styles/Theme.styles";
 import { useState } from "react";
-import { OnOff } from "./onOffSet/onOff/OnOff";
-import { Accordion } from "./accordionSet/accordion/Accordion";
-import { Rating } from "./ratingSet/rating/Rating";
-import { RatingControlled, RatingValueType } from "./ratingSet/ratingControlled/RatingControlled";
-import { AccordionControlled } from "./accordionSet/accordionControlled/AccordionControlled";
-import { OnOffControlled } from "./onOffSet/onOffControlled/OnOffControlled";
+import { OnOff } from "../onOffSet/onOff/OnOff";
+import { Accordion } from "../accordionSet/accordion/Accordion";
+import { Rating } from "../ratingSet/rating/Rating";
+import { RatingControlled, RatingValueType } from "../ratingSet/ratingControlled/RatingControlled";
+import { AccordionControlled } from "../accordionSet/accordionControlled/AccordionControlled";
+import { OnOffControlled } from "../onOffSet/onOffControlled/OnOffControlled";
 import { Gallery } from "./Gallery";
 
 

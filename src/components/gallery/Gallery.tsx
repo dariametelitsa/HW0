@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import styled from "styled-components";
-import { Card } from "./Card";
+import { Card } from "../card/Card";
 import { useState } from "react";
 
 type CardsDataType = {

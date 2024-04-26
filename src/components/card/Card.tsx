@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { cardTheme } from "../styles/Theme.styles";
-import { Button } from "./Button";
-import myimage from './desert.jpg';
+import { cardTheme } from "../../styles/Theme.styles";
+import { Button } from "../button/Button";
+import myimage from '../../assets/desert.jpg';
 
 
 export type CardTypes = {
