@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { cardTheme } from "../Styles/Theme.styles";
+import { cardTheme } from "../styles/Theme.styles";
 import { Button } from "./Button";
 import myimage from './desert.jpg';
 
