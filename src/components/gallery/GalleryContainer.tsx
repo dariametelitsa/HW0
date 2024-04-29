@@ -31,7 +31,7 @@ export function GalleryContainer() {
         <div style={{ display: "flex", justifyContent: "center", gap: '60px' }}>
             <Accordion title={'Hey!'}/>
             <AccordionControlled title={'Controlled'} collapsed={accordionCollapsed} onClickTitle={() => setAccordionCollapsed(!accordionCollapsed)}/>
-            <Rating />
+            <Rating onChange={()=>{}} />
             <RatingControlled value={ratingValue} onClick={setRatingValue}/>
         </div>
 

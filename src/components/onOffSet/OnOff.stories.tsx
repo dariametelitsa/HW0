@@ -9,7 +9,6 @@ const meta: Meta<typeof OnOff> = {
         layout: 'centered',
     },
     tags: ['autodocs'],
-
 };
 
 type Story = StoryObj<typeof OnOff>;
