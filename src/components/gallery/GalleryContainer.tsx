@@ -5,10 +5,17 @@ import { OnOff } from "../onOffSet/onOff/OnOff";
 import { Accordion } from "../accordionSet/accordion/Accordion";
 import { Rating } from "../ratingSet/rating/Rating";
 import { RatingControlled, RatingValueType } from "../ratingSet/ratingControlled/RatingControlled";
-import { AccordionControlled } from "../accordionSet/accordionControlled/AccordionControlled";
+import { AccordionControlled, ItemType } from "../accordionSet/accordionControlled/AccordionControlled";
 import { OnOffControlled } from "../onOffSet/onOffControlled/OnOffControlled";
 import { Gallery } from "./Gallery";
 
+export const accordionSet: ItemType[] = [
+    {title: 'Hey', value: '1'},
+    {title: 'how', value: '2'},
+    {title: 'are', value: '3'},
+    {title: 'you', value: '4'},
+    {title: 'dude', value: '5'},
+];
 
 export function GalleryContainer() {
 
@@ -30,7 +37,7 @@ export function GalleryContainer() {
         <span>Вы выбрали {onOff} в последний раз!</span>
         <div style={{ display: "flex", justifyContent: "center", gap: '60px' }}>
             <Accordion title={'Hey!'}/>
-            <AccordionControlled title={'Controlled'} collapsed={accordionCollapsed} onClickTitle={() => setAccordionCollapsed(!accordionCollapsed)}/>
+            <AccordionControlled title={'Controlled'} items={accordionSet} collapsed={accordionCollapsed} onClickTitle={() => setAccordionCollapsed(!accordionCollapsed)} onItemClick={()=>{}}/>
             <Rating onChange={()=>{}} />
             <RatingControlled value={ratingValue} onClick={setRatingValue}/>
         </div>
