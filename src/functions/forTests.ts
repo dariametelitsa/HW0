@@ -1,5 +1,3 @@
-import { number, string } from "prop-types";
-
 export type UserType = {
     name: string
     hair: number
@@ -19,7 +17,7 @@ export type UserWithBooksType = UserType & {
 }
 
 export type WithCompanyType = UserType & {
-    companies: Array<{id: number, title: string}>
+    companies: Array<{ id: number, title: string }>
 }
 
 export function makeHairstyle(u: UserType, power: number) {
@@ -30,16 +28,16 @@ export function moveUser(u: UserWithLaptopType, newAddress: string) {
     return {...u, address: {...u.address, city: newAddress}};
 }
 
-export function upgradeUserLaptop (u: UserWithLaptopType & UserWithBooksType, newLaptop: string) {
+export function upgradeUserLaptop(u: UserWithLaptopType & UserWithBooksType, newLaptop: string) {
     return {...u, laptop: {...u.laptop, title: newLaptop}};
 }
 
-export function addNewBooksToUser (u: UserWithBooksType, newBooks: string[]) {
+export function addNewBooksToUser(u: UserWithBooksType, newBooks: string[]) {
     //return {...u, books: [...u.books, ...newBooks]};
     return {...u, books: u.books.concat(newBooks)};
 }
 
-export function updateBook (u: UserWithBooksType, oldBook: string, newBook: string) {
+export function updateBook(u: UserWithBooksType, oldBook: string, newBook: string) {
     return {...u, books: u.books.map(b => b === oldBook ? newBook : b)};
 }
 
@@ -52,6 +50,9 @@ export function addNewCompany(u: WithCompanyType, newCompany: string) {
     return {...u, companies: [...u.companies, {id: newId, title: newCompany}]};
 }
 
-export function updateCompanyTitle(companies: { [key: string]: Array<{id: number, title: string}> }, userName: string, companyId: number, newTitle: string) {
+export function updateCompanyTitle(companies: {
+    [key: string]: Array<{ id: number, title: string }>
+}, userName: string, companyId: number, newTitle: string) {
     return {...companies, [userName]: companies[userName].map(c => c.id === companyId ? {...c, title: newTitle} : c)};
 }
+

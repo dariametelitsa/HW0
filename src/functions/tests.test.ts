@@ -192,3 +192,28 @@ test('update company', () => {
     expect(companyCopy['Bob'][0].title).toBe('MTS');
     expect(companies['Bob'][0].title).toBe('yandex');
 });
+
+test('deep copy for obj', () => {
+    const obj = {
+        name: 'It-kamasutra.com',
+        protocol: 'https',
+        maxStudentsCount: 10,
+        isOnline: true,
+        students: ['ivan', 'andrey', 'farid'],
+        classroom: {
+            teacher: {
+                name: 'wew',
+                age: 18
+            }
+        }
+    }
+    const newObj = {...obj, name: 'new', students: [...obj.students], classroom: {...obj.classroom, teacher: {...obj.classroom.teacher}}};
+
+    //expect(obj).toStrictEqual(newObj);
+    expect(obj.name).not.toBe(newObj.name);
+    expect(obj.classroom).not.toBe(newObj.classroom);
+    expect(obj.classroom).toStrictEqual(newObj.classroom);
+    expect(obj.students).not.toBe(newObj.students);
+    expect(obj.students).toStrictEqual(newObj.students);
+
+})

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import styled from "styled-components";
-import { FaChevronDown } from "react-icons/fa6";
 
 export type ItemType = {
     title: string;
@@ -35,9 +34,9 @@ export const Select = (props: SelectProps) => {
                 {/*<FaChevronDown style={{width: '14px'}} />*/}
             </Title>
             {isOpen &&
-                <List tabIndex={1} onFocus={this} onBlur={()=>{setIsOpen(false);}}>
+                <List onBlur={()=>{setIsOpen(false)}}>
                     {props.items.map((item: ItemType, index) =>
-                        <Item key={index} onClick={()=>onClickItemHandler(item.title)}>
+                        <Item autoFocus={index === 0} tabIndex={1} key={index} onClick={()=>onClickItemHandler(item.title)}>
                     {item.title}</Item>)}
                 </List>}
 
