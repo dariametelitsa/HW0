@@ -1,19 +1,13 @@
 import React, { useReducer } from 'react';
-import { reducer, TOGGLE_CONSTANT } from "./Reducer";
+import { reducer, TOGGLE_COLLAPSED } from "./Reducer";
 
 export const Accordion = ({title}: {title: string}) => {
-    //let [collapsed, setCollapsed] = React.useState(false);
-    let [collapsed, dispatch] = useReducer(reducer, false);
-
-    function isCollapsedHandler () {
-        //setCollapsed(!collapsed);
-        dispatch({type: TOGGLE_CONSTANT});
-    }
+    let [state, dispatch] = useReducer(reducer, { collapsed: false });
 
     return (
         <div>
-            <AccordionTitle title={title} onClick={isCollapsedHandler}/>
-            { !collapsed && <AccordionBody />}
+            <AccordionTitle title={title} onClick={() => {dispatch({type: TOGGLE_COLLAPSED})}}/>
+            { !state.collapsed && <AccordionBody />}
         </div>
     );
 };
