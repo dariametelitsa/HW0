@@ -5,11 +5,12 @@ export default {
 }
 
 const NewMessagesCounter = (props: any) => {
-    console.log('heheh');
+    console.log('NewMessagesCounter');
     return <div>{props.count}</div>
 };
 
 const UsersSecret = (props: { users: string[] }) => {
+    console.log('UsersSecret');
     return <div>
         {props.users.map((user: any, i) => (<div key={i}>{user}</div>))}
     </div>

@@ -10,6 +10,8 @@ type SelectSmartProps = {
     items: ItemType[]
 };
 export const SelectSmart = (props: SelectSmartProps) => {
+    console.log('draw me more!');
+
     const selectedItem = props.items.find(i => i.value === props.value);
 
     const [active, setActive] = useState(false);
@@ -20,6 +22,7 @@ export const SelectSmart = (props: SelectSmartProps) => {
     }, [props.value]);
 
     const toggleItems = () => setActive(!active);
+
     const inItemClick = (value: string) => {
         props.onChange(value);
         setCheckedItem(value);
@@ -37,7 +40,6 @@ export const SelectSmart = (props: SelectSmartProps) => {
                 }
             }
         }
-
         if(e.key === 'Enter' || e.key === 'Escape') {
             setActive(false);
         }
@@ -50,7 +52,7 @@ export const SelectSmart = (props: SelectSmartProps) => {
             {active && <SelectMenu isOpen={active}>
                 {props.items.map((item: ItemType, index) => (<ItemMenu
                     selected={item.value === checkedItem}
-                    key={item.value}
+                    key={index}
                     onClick={() => inItemClick(item.value)}
                     >{item.title}
                 </ItemMenu>))}
@@ -70,11 +72,13 @@ const Select = styled.span`
 
 const SelectMenu = styled.div<{ isOpen: boolean }>`
         //display: ${props => props.isOpen ? 'block' : 'none'};
+    padding: 8px;
     bottom: 0;
     left: 0;
     transform: translateY(100%);
     position: absolute;
     border: 1px solid tomato;
+    background-color: white;
 `
 
 const ItemMenu = styled.div<{ selected?: boolean }>`
