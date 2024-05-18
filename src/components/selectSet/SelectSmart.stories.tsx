@@ -1,9 +1,7 @@
 import type { Meta } from '@storybook/react';
-import { accordionSet, Select } from "./Select";
+import { accordionSet } from "./Select";
 import React, { memo, useMemo, useState } from "react";
 import { SelectSmart } from "./SelectSmart";
-import { action } from "@storybook/addon-actions";
-
 
 const meta: Meta<typeof SelectSmart> = {
     component: SelectSmart,

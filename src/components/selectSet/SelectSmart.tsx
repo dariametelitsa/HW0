@@ -14,16 +14,16 @@ export const SelectSmart = (props: SelectSmartProps) => {
 
     const selectedItem = props.items.find(i => i.value === props.value);
 
-    const [active, setActive] = useState(false);
-    const [checkedItem, setCheckedItem] = useState(props.value);
+    const [opened, setOpened] = useState(false);
+    const [checkedItem, setCheckedItem] = useState(props.value);//hovered value
 
     useEffect(() => {
         setCheckedItem(props.value)
     }, [props.value]);
 
-    const toggleItems = () => setActive(!active);
+    const toggleItems = () => setOpened(!opened);
 
-    const inItemClick = (value: string) => {
+    const onItemClick = (value: string) => {
         props.onChange(value);
         setCheckedItem(value);
         toggleItems();
@@ -36,24 +36,26 @@ export const SelectSmart = (props: SelectSmartProps) => {
                     const nextPretendent = e.key === 'ArrowDown' ? props.items[i + 1] : props.items[i - 1]
                     if(nextPretendent) {
                         props.onChange(nextPretendent.value);
+                        break;
                     }
                 }
             }
         }
         if(e.key === 'Enter' || e.key === 'Escape') {
-            setActive(false);
+            setOpened(false);
         }
 
     }
 
     return (
-        <div style={{position: "relative"}} onKeyUp={onKeyDownHandler} tabIndex={0}>
+        <div style={{position: "relative"}} onKeyUp={onKeyDownHandler} tabIndex={0} autoFocus={true}>
             <Select onClick={toggleItems}>{selectedItem && selectedItem.title}</Select>
-            {active && <SelectMenu isOpen={active}>
+            {opened && <SelectMenu isOpen={opened}>
                 {props.items.map((item: ItemType, index) => (<ItemMenu
                     selected={item.value === checkedItem}
                     key={index}
-                    onClick={() => inItemClick(item.value)}
+                    onClick={() => onItemClick(item.value)}
+                    onMouseEnter={()=> setCheckedItem(item.value)}
                     >{item.title}
                 </ItemMenu>))}
             </SelectMenu>}
