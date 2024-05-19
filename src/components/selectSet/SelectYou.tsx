@@ -6,34 +6,52 @@ import styled from "styled-components";
 export type SelectOptions = {
     label: string
     value: string | number
-}
+};
+
+type MultipleSelectProps = {
+    onChange: (value: SelectOptions[]) => void //checked options function
+    value: SelectOptions[] //current value
+    multiple: true
+};
+
+type SingleSelectProps = {
+    onChange: (value: SelectOptions | undefined) => void //checked options function
+    value?: SelectOptions | undefined //current value
+    multiple?: false
+};
 
 type SelectYouProps = {
     options: SelectOptions[] //all values
-    onChange: (value: SelectOptions | undefined) => void //checked options function
-    value?: SelectOptions | undefined //current value
-    multiple?: boolean
-};
+} & (SingleSelectProps | MultipleSelectProps);
+
 export const SelectYou = ({options, onChange, value, multiple}: SelectYouProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [highlightedIndex, setHighlightedIndex] = useState(0);
 
-    useEffect(()=>{
-        if(isOpen) setHighlightedIndex(0);
-    },[isOpen]);
+    useEffect(() => {
+        if (isOpen) setHighlightedIndex(0);
+    }, [isOpen]);
 
     function clearOptions() {
-        onChange(undefined);
+        multiple ? onChange([]) : onChange(undefined);
     }
 
     function selectOption(option: SelectOptions) {
-        if (option.value !== value?.value) {
-            onChange(option);
+        if (multiple) {
+            if (value.includes(option)) {
+                onChange(value.filter(o => o !== option))
+            } else {
+                onChange([...value, option]);
+            }
+        } else {
+            if (option.value !== value?.value) {
+                onChange(option);
+            }
         }
     }
 
     function isOptionSelected(option: SelectOptions) {
-        return option.value === value?.value;
+        return multiple ? value.includes(option) : (option.value === value?.value);
     }
 
     return (
@@ -41,7 +59,12 @@ export const SelectYou = ({options, onChange, value, multiple}: SelectYouProps) 
             <Container onClick={() => setIsOpen(prev => !prev)}
                        onBlur={() => setIsOpen(false)}
                        tabIndex={0}>
-                <Value>{value?.label}</Value>
+                <Value>{multiple ? value.map(v => (
+                    <OptionBadge key={v.value} onClick={e => {
+                        e.stopPropagation();
+                        selectOption(v);
+                    }}>{v.label}<ClearBtn>&times;</ClearBtn></OptionBadge>
+                )) : value?.label}</Value>
                 <ClearBtn
                     onClick={(e) => {
                         e.stopPropagation();
@@ -64,13 +87,13 @@ export const SelectYou = ({options, onChange, value, multiple}: SelectYouProps) 
                             }}
                             isSelected={isOptionSelected(option)}
                             isHighlighted={highlightedIndex === index}
-                                >{option.label}</OptionItem>
-                                ))}
-                        </Options>
-                        </Container>
-                        </>
-                        );
-                    };
+                        >{option.label}</OptionItem>
+                    ))}
+                </Options>
+            </Container>
+        </>
+    );
+};
 
 const Container = styled.div`
     position: relative;
@@ -109,6 +132,21 @@ const ClearBtn = styled.button`
     }
 `
 
+const OptionBadge = styled.button`
+    //background: none;
+    //color: #8c8c8c;
+    //border: none;
+    //outline: none;
+    //cursor: pointer;
+    //padding: 0;
+    //font-size: 1.25em;
+    //
+    //&:focus,
+    //&:hover {
+    //    color: #393939;
+    //}
+`
+
 const Divider = styled.span`
     width: 0.05em;
     align-self: stretch;
@@ -138,9 +176,9 @@ const Options = styled.ul<{ isOpen: boolean }>`
     display: ${props => props.isOpen ? 'block' : 'none'};
 `
 
-const OptionItem = styled.li<{ isSelected: boolean , isHighlighted: boolean}>`
+const OptionItem = styled.li<{ isSelected: boolean, isHighlighted: boolean }>`
     padding: 0.25em 0.5em;
     cursor: pointer;
     background-color: ${props => props.isSelected ? '#00bcd4' : props.isHighlighted ? '#b2ebf2' : 'transparent'};
-    
+
 `

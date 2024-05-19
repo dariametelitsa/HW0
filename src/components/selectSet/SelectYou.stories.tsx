@@ -22,7 +22,13 @@ const options: SelectOptions[] = [
     {label: 'Fifth', value: 5},
 ];
 export const SelectYouBasic = () => {
-    const [value, setValue] = useState<typeof options[0] | undefined>(options[0]);//checked values
-
+    const [value, setValue] = useState<SelectOptions | undefined>(options[0]);//checked values
     return <SelectYou options={options} value={value} onChange={o => setValue(o)} />
+};
+
+
+export const SelectYouMultiple = () => {
+    const [value, setValue] = useState<SelectOptions[]>([options[0]]);
+
+    return <SelectYou multiple options={options} value={value} onChange={o => setValue(o)} />
 };
