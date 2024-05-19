@@ -1,36 +1,76 @@
 // @flow
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import styled from "styled-components";
 
 export type SelectOptions = {
     label: string
-    value: any
+    value: string | number
 }
 
 type SelectYouProps = {
-    value?: SelectOptions | undefined
-    onChange?: (value: SelectOptions | undefined) => void
-    options: SelectOptions[]
+    options: SelectOptions[] //all values
+    onChange: (value: SelectOptions | undefined) => void //checked options function
+    value?: SelectOptions | undefined //current value
     multiple?: boolean
 };
 export const SelectYou = ({options, onChange, value, multiple}: SelectYouProps) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [highlightedIndex, setHighlightedIndex] = useState(0);
+
+    useEffect(()=>{
+        if(isOpen) setHighlightedIndex(0);
+    },[isOpen]);
+
+    function clearOptions() {
+        onChange(undefined);
+    }
+
+    function selectOption(option: SelectOptions) {
+        if (option.value !== value?.value) {
+            onChange(option);
+        }
+    }
+
+    function isOptionSelected(option: SelectOptions) {
+        return option.value === value?.value;
+    }
+
     return (
         <>
-            <Container tabIndex={0}>
+            <Container onClick={() => setIsOpen(prev => !prev)}
+                       onBlur={() => setIsOpen(false)}
+                       tabIndex={0}>
                 <Value>{value?.label}</Value>
-                <ClearBtn>&times;</ClearBtn>
+                <ClearBtn
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        clearOptions()
+                    }}>&times;</ClearBtn>
                 {/*<button className={styles['clear-btn']}>&times;</button>*/}
                 <Divider></Divider>
                 <Caret></Caret>
-                <Options>
-                    {options.map(option => (
-                        <OptionItem key={option.label}>{option.label}</OptionItem>
-                    ))}
-                </Options>
-            </Container>
-        </>
-    );
-};
+                <Options isOpen={isOpen}>
+                    {options.map((option, index) => (
+                        <OptionItem
+                            key={option.value}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                selectOption(option);
+                                setIsOpen(false);
+                            }}
+                            onMouseEnter={() => {
+                                setHighlightedIndex(index)
+                            }}
+                            isSelected={isOptionSelected(option)}
+                            isHighlighted={highlightedIndex === index}
+                                >{option.label}</OptionItem>
+                                ))}
+                        </Options>
+                        </Container>
+                        </>
+                        );
+                    };
 
 const Container = styled.div`
     position: relative;
@@ -43,9 +83,10 @@ const Container = styled.div`
     border-radius: 0.25em;
     border: 0.1em solid rgba(40, 44, 51);
     background-color: white;
+    user-select: none;
 
     &:focus {
-        border-color: darkcyan;
+        border-color: #00acc1;
     }
 `
 
@@ -80,7 +121,7 @@ const Caret = styled.div`
     translate: 0 25%;
 `
 
-const Options = styled.ul`
+const Options = styled.ul<{ isOpen: boolean }>`
     position: absolute;
     margin: 0;
     padding: 0;
@@ -90,23 +131,16 @@ const Options = styled.ul`
     border-radius: 0.25em;
     border: 0.1em solid rgba(40, 44, 51);
     width: 100%;
-    left: 0;
+    left: -0.05em; //because of border
     top: calc(100% + 0.25em);
     background-color: white;
     z-index: 100;
-    //display: none;
+    display: ${props => props.isOpen ? 'block' : 'none'};
 `
 
-const OptionItem = styled.li`
+const OptionItem = styled.li<{ isSelected: boolean , isHighlighted: boolean}>`
     padding: 0.25em 0.5em;
     cursor: pointer;
-
-
-    //highlighted
-    //background-color: #23a6a6;
-    //color:white
-
-    //selected
-    //background-color: #baeeee;
-
+    background-color: ${props => props.isSelected ? '#00bcd4' : props.isHighlighted ? '#b2ebf2' : 'transparent'};
+    
 `
