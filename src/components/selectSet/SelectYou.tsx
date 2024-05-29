@@ -68,7 +68,7 @@ export const SelectYou = ({options, onChange, value, multiple}: SelectYouProps) 
 
     function clearOptions() {
         multiple ? onChange([]) : onChange(undefined);
-    };
+    }
 
     function selectOption(option: SelectOptions) {
         if (multiple) {
@@ -82,7 +82,7 @@ export const SelectYou = ({options, onChange, value, multiple}: SelectYouProps) 
                 onChange(option);
             }
         }
-    };
+    }
 
     //to highlight option with css
     function isOptionSelected(option: SelectOptions) {
