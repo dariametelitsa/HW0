@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from "styled-components";
 
 export type SelectOptions = {
@@ -27,14 +27,48 @@ type SelectYouProps = {
 export const SelectYou = ({options, onChange, value, multiple}: SelectYouProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [highlightedIndex, setHighlightedIndex] = useState(0);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (isOpen) setHighlightedIndex(0);
     }, [isOpen]);
 
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => {
+            if (e.target !== containerRef.current) return;
+            switch (e.code) {
+                case 'Enter':
+                case 'Space':
+                    setIsOpen(prev => !prev);
+                    if (isOpen) selectOption(options[highlightedIndex])
+                    break;
+                case 'ArrowUp':
+                case 'ArrowDown': {
+                    if (!isOpen) {
+                        setIsOpen(true);
+                        break;
+                    }
+                    const newValue = highlightedIndex + (e.code === "ArrowDown" ? 1 : -1);
+                    if (newValue >= 0 && newValue < options.length) {
+                        setHighlightedIndex(newValue);
+                    }
+                    break;
+                }
+                case 'Escape':
+                    setIsOpen(false);
+                    break;
+            }
+        }
+        containerRef.current?.addEventListener('keydown', handler);
+
+        return () => {
+            containerRef.current?.removeEventListener('keydown', handler);
+        }
+    }, [isOpen, highlightedIndex, options]);
+
     function clearOptions() {
         multiple ? onChange([]) : onChange(undefined);
-    }
+    };
 
     function selectOption(option: SelectOptions) {
         if (multiple) {
@@ -48,8 +82,9 @@ export const SelectYou = ({options, onChange, value, multiple}: SelectYouProps) 
                 onChange(option);
             }
         }
-    }
+    };
 
+    //to highlight option with css
     function isOptionSelected(option: SelectOptions) {
         return multiple ? value.includes(option) : (option.value === value?.value);
     }
@@ -58,17 +93,22 @@ export const SelectYou = ({options, onChange, value, multiple}: SelectYouProps) 
         <>
             <Container onClick={() => setIsOpen(prev => !prev)}
                        onBlur={() => setIsOpen(false)}
+                       ref={containerRef}
                        tabIndex={0}>
                 <Value>{multiple ? value.map(v => (
-                    <OptionBadge key={v.value} onClick={e => {
-                        e.stopPropagation();
-                        selectOption(v);
-                    }}>{v.label}<ClearBtn>&times;</ClearBtn></OptionBadge>
+                    <OptionBadge key={v.value}
+                                 onClick={e => {
+                                     e.stopPropagation();
+                                     selectOption(v);
+                                 }}>
+                        {v.label}
+                        <ClearBtn>&times;</ClearBtn>
+                    </OptionBadge>
                 )) : value?.label}</Value>
                 <ClearBtn
                     onClick={(e) => {
                         e.stopPropagation();
-                        clearOptions()
+                        clearOptions();
                     }}>&times;</ClearBtn>
                 {/*<button className={styles['clear-btn']}>&times;</button>*/}
                 <Divider></Divider>
@@ -115,6 +155,9 @@ const Container = styled.div`
 
 const Value = styled.span`
     flex-grow: 1;
+    display: flex;
+    gap: 0.5em;
+    flex-wrap: wrap;
 `
 
 const ClearBtn = styled.button`
@@ -133,18 +176,31 @@ const ClearBtn = styled.button`
 `
 
 const OptionBadge = styled.button`
-    //background: none;
-    //color: #8c8c8c;
-    //border: none;
-    //outline: none;
-    //cursor: pointer;
-    //padding: 0;
-    //font-size: 1.25em;
-    //
-    //&:focus,
-    //&:hover {
-    //    color: #393939;
-    //}
+    display: flex;
+    gap: 0.25em;
+    align-items: center;
+    padding: 0.15em 0.25em;
+    border: 0.05em solid #777;
+    border-radius: 0.25em;
+    background: none;
+    cursor: pointer;
+    outline: none;
+
+    &:focus,
+    &:hover {
+        background-color: hsl(0, 100%, 90%);
+        border-color: hsl(0, 100%, 50%);
+    }
+
+    & > ${ClearBtn} {
+        color: #777;
+        font-size: 1.25em;
+    }
+
+    &:focus > ${ClearBtn},
+    &:hover > ${ClearBtn} {
+        color: hsl(0, 100%, 50%);
+    }
 `
 
 const Divider = styled.span`
