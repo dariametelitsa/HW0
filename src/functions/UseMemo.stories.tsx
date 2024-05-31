@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 export default {
     title: 'UseMemo',
@@ -54,13 +54,15 @@ const UsersSecret = (props: { users: string[] }) => {
 };
 const Users = React.memo(UsersSecret);
 
+
 export const UseMemoStories_HelpsToReactMemo = () => {
     const [counter, setCounter] = React.useState(0);
     const [users, setUsers] = React.useState(['Valera', 'Nikol', 'Santropa']);
 
     const filteredUsers = useMemo(() => {
         console.log('Zatupok');
-        return users.filter(u=>u.toLowerCase().indexOf('a') > -1)}, [users]);
+        return users.filter(u => u.toLowerCase().indexOf('a') > -1)
+    }, [users]);
 
     const addUser = () => {
         setUsers([...users, 'Kate ' + new Date().getTime()]);
@@ -76,3 +78,46 @@ export const UseMemoStories_HelpsToReactMemo = () => {
         <Users users={filteredUsers}/>
     </>
 };
+
+
+type BooksSecretPropsType = { books: string[], addBook: () => void };
+
+const BooksSecret = (props: BooksSecretPropsType) => {
+    console.log('Books Secret')
+    return <div>
+        <button onClick={props.addBook}>add book</button>
+        {props.books.map((book: any, i) => (<div key={i}>{book}</div>))}
+    </div>
+};
+const Books = React.memo(BooksSecret);
+
+export const LikeUseCallBack = () => {
+    console.log('LikeUseCallBack');
+    const [counter, setCounter] = React.useState(0);
+    const [books, setBooks] = React.useState(['react', 'js', 'html']);
+
+    const filteredBooks = useMemo(() => {
+        console.log('Zatupok');
+        return books.filter(u => u.toLowerCase().indexOf('a') > -1)
+    }, [books]);
+
+    const memoizedAddBooks = useMemo(() => {
+        return () => {
+            setBooks([...books, 'angular ' + new Date().getTime()]);
+        }
+    }, [books]);
+
+    const memoizedAddBooksCB = useCallback(() => {
+        setBooks([...books, 'angular ' + new Date().getTime()]);
+    }, [books]);
+
+    return <>
+        <button onClick={() => {
+            setCounter(counter + 1)
+        }}>+
+        </button>
+        {counter}
+        <Books books={filteredBooks} addBook={memoizedAddBooks}/>
+    </>
+};
+

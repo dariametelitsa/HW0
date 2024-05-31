@@ -10,7 +10,6 @@ type SelectSmartProps = {
     items: ItemType[]
 };
 export const SelectSmart = (props: SelectSmartProps) => {
-    console.log('draw me more!');
 
     const selectedItem = props.items.find(i => i.value === props.value);
 
