@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { clearInterval } from "node:timers";
 
 function get2digitsString(date: number) {
     return date < 10
@@ -13,9 +14,12 @@ export const Clock: React.FC = (props: ClockProps) => {
     const [date, setDate] = useState(new Date);
 
     useEffect(() => {
-        setInterval(() => {
+        const intervalId = setInterval(() => {
             setDate(new Date);
         }, 1000);
+        return () => {
+            clearInterval(intervalId);
+        }
     }, []);
 
     return (
