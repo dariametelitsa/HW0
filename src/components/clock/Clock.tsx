@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { clearInterval } from "node:timers";
 
 function get2digitsString(date: number) {
     return date < 10
